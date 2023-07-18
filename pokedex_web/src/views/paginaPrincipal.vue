@@ -1,31 +1,44 @@
 <template>
   <main>
-    <pokemonCard v-for="pokemon in pokemonList" :key="pokemon.id" :pokemon="pokemon"/>
+
+    <pokemon-card v-for="pokemon in pokemonList" :key="pokemon.id" :pokemon="pokemon"/>
   </main>
 </template>
 
 <script>
-import pokemonCard from '@/components/pokemonCard.vue'
-import getAllPKMN from '@/services/pokeapiService.vue'
+import PokemonCard from '@/components/PokemonCard.vue';
+import { getAllPKMN, getPKMNDetails, getByNamePKMN } from '@/services/pokeapiService.js';
 
-export default{
-  components:{
-    pokemonCard
+export default {
+  components: {
+    'pokemon-card': PokemonCard,
   },
-  data(){
-    return{
+  data() {
+    return {
       pokemonList: [],
-
+    };
+  },
+  async created() {
+    try {
+      const pokemonsData = await getAllPKMN();
+      console.log(pokemonsData)
+      this.pokemonList = pokemonsData;
+    } catch (error) {
+      console.error(error);
     }
   },
-  async created(){
-    try {
-      this.pokemonList = await getAllPKMN() 
-    } catch(error){
-      console.error(error)
-    }
 
-  }
-}
+  methods: {
+    async loadPokemonDetails() {
+      for (const pokemon of this.pokemonList) {
+        const details = await getPKMNDetails(pokemon.url);
+
+        if (details) {
+          pokemon.types = details.types.map((typeObj) => typeObj.type.name);
+          pokemon.imageUrl = details.sprites.front_default;
+        }
+      }
+    },
+  },
+};
 </script>
-
