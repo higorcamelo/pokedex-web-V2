@@ -4,7 +4,7 @@ const baseUrl = 'https://pokeapi.co/api/v2/';
 
 export async function getAllPKMN() {
   try {
-    const resposta = await axios.get(`${baseUrl}pokemon?limit=151`);
+    const resposta = await axios.get(`${baseUrl}pokemon?limit=151`); //TODO: Fazer aqui um ajuste para exibir por geração
     return resposta.data.results;
   } catch (error) {
     console.error(error);

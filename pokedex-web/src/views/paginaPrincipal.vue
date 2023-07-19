@@ -1,7 +1,12 @@
 <template>
   <main>
-
-    <pokemon-card v-for="pokemon in pokemonList" :key="pokemon.id" :pokemon="pokemon"/>
+    <v-container>
+      <v-row>
+        <v-col v-for="pokemon in pokemonList" :key="pokemon.id" cols="12" sm="6" md="4" lg="3">
+          <pokemon-card :pokemon="pokemon" />
+        </v-col>
+      </v-row>
+    </v-container>
   </main>
 </template>
 

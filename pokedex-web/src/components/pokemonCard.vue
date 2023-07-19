@@ -4,7 +4,7 @@
             <img :src="pokemon.imageUrl" :alt="pokemon.name" />
             <div class="pokemon-info">
                 <h3>{{ capitalizarNome(pokemon.name) }}</h3>
-                <p v-if="pokemon.types">Type: {{ capitalizarTipos(pokemon.types) }}</p>
+                <p>Tipos: {{ pokemon.types }}</p>
             </div>
         </v-card>
     </v-container>
@@ -22,15 +22,30 @@
       capitalizarNome(texto) {
         return texto.charAt(0).toUpperCase() + texto.slice(1);
       },
-      capitalizarTipos(tipos) {
-        const tiposFormatados = tipos.map((tipo) => this.capitalizarNome(tipo.type.name));
-        return tiposFormatados.join('/ ');
-      },
     },
   };
   </script>
   
   <style scoped>
   /* Estilize o card do Pokémon conforme necessário */
+  
+  .pokemon-card {
+    margin-bottom: 20px;
+  }
+  
+  .pokemon-info {
+    padding: 16px;
+    background-color: #f0f0f0;
+  }
+  
+  .pokemon-name {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .pokemon-types {
+    font-size: 16px;
+    color: #333;
+  }
   </style>
   
