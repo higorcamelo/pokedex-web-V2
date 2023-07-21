@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container fluid fill-height>
       <!-- Cabeçalho com sprites e título -->
       <v-row class="header-row justify-content-center">
         <!-- Lado esquerdo com os sprites -->
@@ -101,4 +101,5 @@
 .generation-btn:hover {
   background-color: #FFD07B; /* Cor de fundo laranja mais escura ao passar o mouse nos botões */
 }
+
 </style>
