@@ -22,8 +22,7 @@
       <v-row class="generation-row justify-content-center" style="background: linear-gradient(to right, #FFD700, #FFA500);">
         <v-col cols="12">
           <v-btn-group>
-            <v-btn v-for="generation in generations" :key="generation" text class="generation-btn">
-              {{ generation }}
+            <v-btn v-for="(generation, index) in generations" :key="index" @click="selecionarGeracao(index)" :color="geracaoAtual === index ? 'primary' : 'white'" text class="generation-btn">              {{ generation }}
             </v-btn>
           </v-btn-group>
         </v-col>
@@ -39,6 +38,8 @@
   import blaziken from '@/assets/blaziken.png';
   
   export default {
+    props:['geracaoAtual'],
+
     data() {
       return {
         generations: ['Kanto', 'Jotho', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Paldea'],
@@ -58,6 +59,9 @@
       getSpriteUrl(sprite) {
         return sprite;
       },
+      selecionarGeracao(index){
+        this.$emit('mudar-geracao', index)
+      }
     },
   };
   </script>

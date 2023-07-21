@@ -3,17 +3,41 @@ import axios from 'axios';
 const baseUrl = 'https://pokeapi.co/api/v2/';
 
 export async function getAllPKMN(gen) {
-  if(!gen){
-    gen = 1
+  if (!gen) {
+    gen = 1;
   }
   try {
-    const resposta = await axios.get(`${baseUrl}generation/${gen}`); //TODO: Fazer aqui um ajuste para exibir por geração
-    console.log(resposta.data.pokemon_species)
-    return resposta.data.pokemon_species;
+    const resposta = await axios.get(`${baseUrl}generation/${gen}`);
+    const pokemons = resposta.data.pokemon_species;
+
+    // Mapear os Pokemons para obter seus detalhes e tipos
+    const pokemonListPromises = pokemons.map(async (pokemon) => {
+      const detailsResponse = await axios.get(`${baseUrl}pokemon/${extractPokemonIdFromUrl(pokemon.url)}`);
+      const details = detailsResponse.data;
+      return {
+        id: details.id,
+        name: details.name,
+        types: details.types.map((typeObj) => typeObj.type.name).join(' / '),
+      };
+    });
+
+    // Aguardar todas as chamadas assíncronas para obter os detalhes dos Pokemons
+    const pokemonList = await Promise.all(pokemonListPromises);
+
+    // Ordenar a lista de Pokemons por ID
+    pokemonList.sort((a, b) => a.id - b.id);
+
+    console.log(pokemonList);
+    return pokemonList;
   } catch (error) {
     console.error(error);
     return [];
   }
+}
+
+function extractPokemonIdFromUrl(url) {
+  const parts = url.split('/');
+  return parseInt(parts[parts.length - 2]);
 }
 
 export async function getByNamePKMN(nome) {
