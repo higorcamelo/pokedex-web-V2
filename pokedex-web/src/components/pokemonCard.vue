@@ -27,7 +27,6 @@
   </script>
   
   <style scoped>
-  /* Estilize o card do Pokémon conforme necessário */
   
   .pokemon-card {
     margin-bottom: 20px;
