@@ -30,6 +30,11 @@
     </v-container>
   </template>
   <script>
+  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  //TODO REFAZER TUDO ISSO (HEADER MENOR)
+  // SÓ TÍTULO E BLAZIKEN DO LADO, MENU CASCATA COM REGIÕES, CASCATA COM MAIS COISA(?), BARRA DE BUSCA COM AUTOCOMPLETE
+  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
   import togekiss from '@/assets/togekiss.png';
   import magnezone from '@/assets/magnezone.png';
   import araquanid from '@/assets/araquanid.png';
