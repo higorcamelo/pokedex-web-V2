@@ -1,22 +1,23 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import paginaPrincipal from '../views/paginaPrincipal.vue'
-import paginaDetalhes from '@/views/paginaDetalhes.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import PaginaPrincipal from '@/views/paginaPrincipal.vue';
+import PaginaDetalhes from '@/views/paginaDetalhes.vue';
 
+// Criação do router
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
-      component: paginaPrincipal
+      component: PaginaPrincipal, // Utilizamos o componente importado, com o nome correto
     },
     {
-      path:'/pokemon/:id',
-      name:'detalhes',
-      component: paginaDetalhes
-    }
-   
-  ]
-})
+      path: '/pokemon/:id',
+      name: 'detalhes',
+      component: PaginaDetalhes, // Utilizamos o componente importado, com o nome correto
+    },
+    // Adicione outras rotas aqui, se necessário
+  ],
+});
 
-export default router
+export default router;

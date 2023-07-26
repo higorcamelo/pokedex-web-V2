@@ -1,6 +1,6 @@
 <template>
     <v-container class="pokemon-card">
-        <v-card>
+        <v-card @click="redirDetalhes()">
             <img :src="pokemon.imageUrl" :alt="pokemon.name" />
             <div class="pokemon-info">
                 <h3>{{ capitalizarNome(pokemon.name) }}</h3>
@@ -22,6 +22,9 @@
       capitalizarNome(texto) {
         return texto.charAt(0).toUpperCase() + texto.slice(1);
       },
+      redirDetalhes(){
+        this.$emit('mudar-geracao', this.pokemon.id)
+        this.$router.push({ name: 'detalhes', params: { id: this.pokemon.id } });      }
     },
   };
   </script>

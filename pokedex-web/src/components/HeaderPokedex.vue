@@ -72,6 +72,7 @@
   </script>
   
   <style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap');
 .v-btn {
   margin: 5px 10px; /* Espaçamento vertical 5px e horizontal 10px entre os botões */
   border-radius: 50px; /* Bordas mais arredondadas nos botões */
@@ -87,6 +88,7 @@
 }
 
 .title {
+  font-family: 'Montserrat Subrayada', sans-serif;
   font-size: 24px; /* Tamanho do título */
   color: #FFFFFF; /* Cor do título branca */
   margin: 0; /* Remover margens do título */
