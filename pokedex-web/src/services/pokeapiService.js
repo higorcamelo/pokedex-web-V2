@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const baseUrl = 'https://pokeapi.co/api/v2/';
 
-export async function getAllPKMN(gen) {
+export async function getAllPkmn(gen) {
   if (!gen) {
     gen = 1;
   }
@@ -27,7 +27,7 @@ export async function getAllPKMN(gen) {
     // Ordenar a lista de Pokemons por ID
     pokemonList.sort((a, b) => a.id - b.id);
 
-    console.log(pokemonList);
+    //console.log(pokemonList);
     return pokemonList;
   } catch (error) {
     console.error(error);
@@ -50,10 +50,19 @@ export async function getByNamePKMN(nome) {
   }
 }
 
-export async function getPKMNDetails(url){
+export async function getPkmnDetails(id){
     try {
-        const resposta = await axios.get(url);
-        return resposta.data;
+        const resposta = await axios.get(`${baseUrl}pokemon/${id}`);
+        const data = resposta.data
+        const pokemonDetalhes = {
+          nome: data.name,
+          imagem: data.sprites.other['official-artwork'].front_default, // Use as aspas simples para acessar a propriedade com hífen
+          tipos: data.types,
+          habilidades: data.abilities,
+          stats: data.stats,
+          ataques: data.moves,
+        }
+        return pokemonDetalhes;
       } catch (error) {
         console.error(error);
         return null;

@@ -17,7 +17,7 @@
 <script>
 import pokemonCard from '@/components/pokemonCard.vue'
 import HeaderPokedex from '@/components/HeaderPokedex.vue'
-import { getAllPKMN } from '@/services/pokeapiService.js';
+import { getAllPkmn, getPkmnDetails } from '@/services/pokeapiService.js';
 
 export default {
   name: 'App',
@@ -34,6 +34,7 @@ export default {
   },
   async created() {
     await this.fetchPokemonList(this.geracaoAtual)
+    console.log(getPkmnDetails(256))
   },
 
   methods: {
@@ -42,7 +43,7 @@ export default {
     },
     async fetchPokemonList(gen) {
       try {
-        const pokemonsData = await getAllPKMN(gen);
+        const pokemonsData = await getAllPkmn(gen);
 
         this.pokemonList = pokemonsData.map((pokemonData) => ({
           id: pokemonData.id,

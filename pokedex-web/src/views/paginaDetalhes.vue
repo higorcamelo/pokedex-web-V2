@@ -11,26 +11,15 @@
 </template>
 
 <script>
-import PokemonCard from '@/components/PokemonCard.vue';
-import { getAllPKMN, getPKMNDetails, getByNamePKMN } from '@/services/pokeapiService.js';
+import { getPKMNDetails } from '@/services/pokeapiService.js';
 
 export default {
-  components: {
-    'pokemon-card': PokemonCard,
-  },
   data() {
     return {
       pokemonList: [],
     };
   },
   async created() {
-    try {
-      const pokemonsData = await getAllPKMN();
-      console.log(pokemonsData)
-      this.pokemonList = pokemonsData;
-    } catch (error) {
-      console.error(error);
-    }
   },
 
   methods: {
