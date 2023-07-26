@@ -22,7 +22,7 @@
       capitalizarNome(texto) {
         return texto.charAt(0).toUpperCase() + texto.slice(1);
       },
-      redirDetalhes(){
+      redirDetalhes(){ //TODO: DESCOBRIR COMO TRANSMITIR O ID DE CADA CARD PARA REDIRECIONAR COM DADOS
         this.$emit('mudar-geracao', this.pokemon.id)
         this.$router.push({ name: 'detalhes', params: { id: this.pokemon.id } });      }
     },
