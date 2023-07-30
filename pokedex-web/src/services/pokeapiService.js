@@ -62,6 +62,7 @@ export async function getPkmnDetails(id){
           stats: data.stats,
           ataques: data.moves,
         }
+        console.log(data.moves.version_group_details)
         return pokemonDetalhes;
       } catch (error) {
         console.error(error);

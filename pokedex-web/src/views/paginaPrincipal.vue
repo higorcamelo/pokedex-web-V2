@@ -4,7 +4,8 @@
     <v-container v-if="!loading">
       <v-row>
         <v-col v-for="pokemon in pokemonList" :key="pokemon.id" cols="12" sm="6" md="4" lg="3">
-          <pokemon-card :pokemon="pokemon" />
+          <!-- Ouça o evento pokemon-clicked e chame o método onPokemonCardClicked -->
+          <pokemon-card :pokemon="pokemon" @pokemon-clicked="onPokemonCardClicked" />
         </v-col>
       </v-row>
     </v-container>
@@ -59,6 +60,10 @@ export default {
         console.error(error);
         this.loading = false;
       }
+    },
+    // Método para redirecionar para a página de detalhes do Pokémon
+    onPokemonCardClicked(pokemonId) {
+      this.$router.push({ name: 'detalhes', params: { id: pokemonId } });
     },
     onMudancaGeracao(index) {
       this.geracaoAtual = index;
