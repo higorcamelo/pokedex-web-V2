@@ -1,76 +1,55 @@
 <template>
-    <v-container fluid fill-height>
-      <!-- Cabeçalho com sprites e título -->
-      <v-row class="header-row justify-content-center">
-        <!-- Lado esquerdo com os sprites -->
-        <v-col v-for="sprite in leftSprites" :key="sprite.name" cols="1">
-          <img :src="getSpriteUrl(sprite.sprite)" :alt="sprite.name" height="50" />
-        </v-col>
-  
-        <!-- Parte central com o título -->
-        <v-col cols="2" class="text-center">
-          <h2 class="title">PokeWeb V2</h2>
-        </v-col>
-  
-        <!-- Lado direito com os sprites -->
-        <v-col v-for="sprite in rightSprites" :key="sprite.name" cols="1">
-          <img :src="getSpriteUrl(sprite.sprite)" :alt="sprite.name" height="50" />
-        </v-col>
-      </v-row>
-  
-      <!-- Linha com os botões das gerações -->
-      <v-row class="generation-row justify-content-center" style="background: linear-gradient(to right, #FFD700, #FFA500);">
-        <v-col cols="12">
-          <v-btn-group>
-            <v-btn v-for="(generation, index) in generations" :key="index" @click="selecionarGeracao(index)" :color="geracaoAtual === index ? 'primary' : 'white'" text class="generation-btn">              {{ generation }}
-            </v-btn>
-          </v-btn-group>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template>
-  <script>
-  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  //TODO REFAZER TUDO ISSO (HEADER MENOR)
-  // SÓ TÍTULO E BLAZIKEN DO LADO, MENU CASCATA COM REGIÕES, CASCATA COM MAIS COISA(?), BARRA DE BUSCA COM AUTOCOMPLETE
-  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  <v-container fluid fill-height>
+    <!-- Cabeçalho com sprites e título -->
+    <v-row class="header-row justify-content-center">
+      <v-col cols="2" class="text-center">
+        <h2 class="title">PokeWeb V2</h2>
+      </v-col>
+      <v-col>
+        <v-img :src="sprite" :width="100"></v-img>
+      </v-col>
+    </v-row>
 
-  import togekiss from '@/assets/togekiss.png';
-  import magnezone from '@/assets/magnezone.png';
-  import araquanid from '@/assets/araquanid.png';
-  import slurpuff from '@/assets/slurpuff.png';
-  import porygonz from '@/assets/porygon-z.png';
-  import blaziken from '@/assets/blaziken.png';
-  
-  export default {
-    props:['geracaoAtual'],
+    <!-- Linha com os botões das gerações -->
+    <v-row class="generation-row justify-content-center" style="background: linear-gradient(to right, #FFD700, #FFA500);">
+      <v-col cols="12">
+        <v-select label="Geração" :items="geracoesOptions" variant="underlined" v-model="selecGen" @change="selecionarGeracao"></v-select>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
 
-    data() {
-      return {
-        generations: ['Kanto', 'Jotho', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Paldea'],
-        leftSprites: [
-          { sprite: togekiss, name: 'Togekiss' },
-          { sprite: magnezone, name: 'Magnezone' },
-          { sprite: araquanid, name: 'Araquanid' },
-        ],
-        rightSprites: [
-          { sprite: slurpuff, name: 'Slurpuff' },
-          { sprite: porygonz, name: 'Porygon-Z' },
-          { sprite: blaziken, name: 'Blaziken' },
-        ],
-      };
+<script>
+import blaziken from '@/assets/blaziken.png';
+
+export default {
+  props: ['geracaoAtual'],
+  data() {
+    return {
+      generations: ['Kanto', 'Jotho', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Paldea'],
+      sprite: blaziken,
+      selecGen: null,
+    };
+  },
+  computed: {
+    geracoesOptions() {
+      return this.generations.map((geracao) => ({
+        text: geracao,
+        value: geracao,
+      }));
     },
-    methods: {
-      getSpriteUrl(sprite) {
-        return sprite;
-      },
-      selecionarGeracao(index){
-        this.$emit('mudar-geracao', index)
-      }
+  },
+  methods: {
+    getSpriteUrl(sprite) {
+      return sprite;
     },
-  };
-  </script>
-  
+    selecionarGeracao() {
+      console.log(this.selecGen);
+      this.$emit('mudar-geracao', this.selecGen);
+    },
+  },
+};
+</script>
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap');
 .v-btn {
