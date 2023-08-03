@@ -1,4 +1,5 @@
 <template>
+  <header-pokedex :showSelect = "false"></header-pokedex>
   <v-container v-if="!loading" class="pokemon-container">
     <v-row>
       <v-col cols="12" sm="6">
@@ -46,14 +47,18 @@
 <script>
 //TODO: CORRIGIR PAGINAÇÃO
 import { getPkmnDetails } from '@/services/pokeapiService.js';
+import HeaderPokedex from '@/components/HeaderPokedex.vue';
 
 export default {
+  components: {
+    'header-pokedex': HeaderPokedex
+  },
   data() {
     return {
       pokemon: null,
       loading: true,
       currentPage: 1,
-      itemsPerPage: 10, // Defina o número de itens por página aqui
+      itemsPerPage: 10, 
     };
   },
   created() {

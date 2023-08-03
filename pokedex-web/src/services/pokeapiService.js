@@ -27,7 +27,6 @@ export async function getAllPkmn(gen) {
     // Ordenar a lista de Pokemons por ID
     pokemonList.sort((a, b) => a.id - b.id);
 
-    //console.log(pokemonList);
     return pokemonList;
   } catch (error) {
     console.error(error);
@@ -62,7 +61,6 @@ export async function getPkmnDetails(id){
           stats: data.stats,
           ataques: data.moves,
         }
-        console.log(data.moves.version_group_details)
         return pokemonDetalhes;
       } catch (error) {
         console.error(error);
