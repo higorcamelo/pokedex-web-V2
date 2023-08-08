@@ -93,6 +93,8 @@ export default {
 </script>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap');
+
 /* Estilos do header */
 .header-container {
   padding: 10px; /* Espaçamento interno para o header */
